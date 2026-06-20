@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>家庭財務會議作戰手冊</title>
+<style>
+:root{
+    --primary:#c0392b;
+    --primary-dark:#922b21;
+    --blue:#1f4e79;
+    --ink:#2c3e50;
+    --muted:#7f8c8d;
+    --line:#e0e0e0;
+    --bg:#f5f7fa;
+    --good:#27ae60;
+    --normal:#f39c12;
+    --bad:#c0392b;
+}
+*{box-sizing:border-box;}
+body{
+    font-family:"Microsoft JhengHei","PingFang TC","Helvetica Neue",sans-serif;
+    max-width:920px;
+    margin:0 auto;
+    padding:24px 20px 90px;
+    line-height:1.85;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+}
+header{text-align:center;margin-bottom:8px;}
+h1{color:var(--blue);font-size:2rem;margin:0 0 6px;}
+.subtitle{color:var(--muted);font-size:.95rem;margin:0 0 20px;}
+.print-btn{
+    display:inline-block;margin-top:6px;
+    background:var(--blue);color:#fff;border:none;
+    padding:8px 18px;border-radius:8px;cursor:pointer;font-size:.9rem;
+}
+/* 頂部分頁導覽 */
+.tabs{
+    display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+    margin:24px 0;position:sticky;top:0;background:var(--bg);
+    padding:10px 0;z-index:50;
+}
+.tabs button{
+    border:1px solid var(--blue);background:#fff;color:var(--blue);
+    padding:8px 18px;border-radius:20px;cursor:pointer;font-size:.95rem;
+    font-family:inherit;transition:all .15s;
+}
+.tabs button.active{background:var(--blue);color:#fff;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fade .25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.section-title{
+    color:var(--blue);font-size:1.4rem;
+    border-bottom:2px solid var(--blue);padding-bottom:8px;margin:36px 0 18px;
+}
+.quote{
+    background:#eef8ff;border-left:6px solid #2980b9;
+    padding:18px 22px;border-radius:10px;font-weight:bold;
+    font-size:1.05rem;margin:18px 0;color:var(--blue);
+}
+.card{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.05);
+}
+.card h2,.card h3{margin-top:0;}
+.card h2{font-size:1.15rem;color:var(--ink);display:flex;align-items:center;gap:10px;}
+.num{
+    flex:0 0 auto;width:28px;height:28px;background:var(--primary);
+    color:#fff;border-radius:50%;display:inline-flex;align-items:center;
+    justify-content:center;font-size:.85rem;font-weight:bold;
+}
+ul.checklist{list-style:none;margin:0;padding:0;}
+ul.checklist li{
+    padding:8px 0 8px 32px;position:relative;border-bottom:1px dashed var(--line);
+}
+ul.checklist li:last-child{border-bottom:none;}
+ul.checklist li::before{
+    content:"";position:absolute;left:0;top:13px;width:18px;height:18px;
+    border:2px solid var(--primary);border-radius:4px;
+}
+ol{padding-left:22px;}
+ol li{margin-bottom:6px;}
+.note{background:#fff8dc;border-left:6px solid #f39c12;padding:18px 22px;border-radius:10px;margin:18px 0;}
+.warning{background:#ffeaea;border-left:6px solid var(--primary);padding:18px 22px;border-radius:10px;margin:18px 0;}
+.warning h3{margin-top:0;color:var(--primary);}
+.stance{background:#eaf6ff;border-left:6px solid #2980b9;padding:18px 22px;border-radius:10px;margin:18px 0;}
+.stance p:last-child{margin-bottom:0;}
+
+/* 劇本卡 */
+.scenario{border-left:8px solid var(--line);}
+.scenario.good{border-left-color:var(--good);}
+.scenario.normal{border-left-color:var(--normal);}
+.scenario.bad{border-left-color:var(--bad);}
+.badge{
+    display:inline-block;padding:3px 12px;border-radius:14px;font-size:.85rem;
+    font-weight:bold;color:#fff;margin-left:8px;
+}
+.badge.good{background:var(--good);}
+.badge.normal{background:var(--normal);}
+.badge.bad{background:var(--bad);}
+.timeline{list-style:none;padding-left:8px;margin:12px 0;}
+.timeline li{position:relative;padding-left:24px;margin-bottom:8px;}
+.timeline li::before{
+    content:"";position:absolute;left:4px;top:11px;width:9px;height:9px;
+    background:var(--blue);border-radius:50%;
+}
+.timeline li:not(:last-child)::after{
+    content:"";position:absolute;left:8px;top:18px;bottom:-8px;width:1px;background:var(--line);
+}
+.green{color:var(--good);font-weight:bold;}
+.red{color:var(--bad);font-weight:bold;}
+
+.toTop{
+    position:fixed;right:20px;bottom:20px;background:var(--blue);color:#fff;
+    border:none;border-radius:50%;width:46px;height:46px;font-size:1.2rem;
+    cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none;
+}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:40px;}
+
+@media print{
+    body{background:#fff;padding:0;}
+    .tabs,.toTop,.print-btn{display:none !important;}
+    .tab-panel{display:block !important;}
+    .card,.note,.warning,.stance,.quote{box-shadow:none;break-inside:avoid;}
+    .section-title{break-before:page;}
+}
+@media (max-width:600px){
+    body{padding:16px 14px 70px;}
+    h1{font-size:1.5rem;}
+    .tabs button{padding:6px 12px;font-size:.85rem;}
+}
+
+/* ===== 互動記錄 + RWD 強化 ===== */
+.autosave-hint{
+    text-align:center;color:var(--muted);font-size:.82rem;
+    background:#f0f7ff;border-radius:8px;padding:8px 12px;margin:0 0 18px;
+}
+body{padding-bottom:104px;}            /* 留底部工具列空間 */
+
+ul.checklist li{
+    padding:10px 0;display:grid;grid-template-columns:auto 1fr;
+    gap:6px 10px;align-items:start;
+}
+ul.checklist li::before{display:none;} /* 改用可點擊的真正方框 */
+ol li.q-item{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:start;margin-left:-22px;}
+.cb{
+    width:24px;height:24px;flex:0 0 auto;margin-top:1px;
+    border:2px solid var(--primary);border-radius:6px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    color:#fff;font-size:16px;line-height:1;user-select:none;
+    -webkit-tap-highlight-color:transparent;transition:background .12s;
+}
+li.checked .cb{background:var(--primary);}
+li.checked .cb::after{content:"✓";}
+.q{align-self:center;}
+li.checked .q{color:var(--muted);text-decoration:line-through;}
+.qnote{
+    grid-column:1 / -1;width:100%;box-sizing:border-box;
+    font-family:inherit;font-size:16px;line-height:1.6;color:var(--ink);
+    border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+    background:#fcfcfb;resize:none;overflow:hidden;min-height:40px;}
+.qnote:focus{outline:none;border-color:var(--blue);background:#fff;}
+.qnote.filled{border-color:var(--good);background:#f6fff8;}
+
+.toolbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    display:flex;align-items:center;gap:8px;padding:8px 14px;
+    background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+    box-shadow:0 -2px 8px rgba(0,0,0,.06);
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+    padding-bottom:calc(8px + env(safe-area-inset-bottom));
+}
+.toolbar .prog{font-size:.85rem;color:var(--muted);margin-right:auto;}
+.toolbar .prog b{color:var(--blue);}
+.toolbar button{
+    border:1px solid var(--blue);background:#fff;color:var(--blue);
+    padding:9px 14px;border-radius:8px;font-size:.9rem;cursor:pointer;
+    font-family:inherit;white-space:nowrap;
+}
+.toolbar button.primary{background:var(--blue);color:#fff;}
+.saved-tag{font-size:.78rem;color:var(--good);opacity:0;transition:opacity .3s;white-space:nowrap;}
+.saved-tag.show{opacity:1;}
+.toTop{bottom:76px;}
+
+@media print{
+    .toolbar,.autosave-hint{display:none !important;}
+    .cb{display:none;}
+    .qnote{border:none;background:none;padding:0;min-height:auto;}
+    ul.checklist li,ol li.q-item{display:block;}
+}
+@media (max-width:600px){
+    .tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;
+        -webkit-overflow-scrolling:touch;padding:8px 4px;}
+    .tabs::-webkit-scrollbar{display:none;}
+    .tabs button{flex:0 0 auto;}
+    .card{padding:16px;}
+    .toolbar{gap:6px;padding:8px 10px;padding-bottom:calc(8px + env(safe-area-inset-bottom));}
+    .toolbar button{padding:9px 11px;font-size:.82rem;}
+    .toolbar .prog{font-size:.76rem;}
+    .saved-tag{display:none;}
+    body{padding-bottom:112px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>家庭財務會議作戰手冊</h1>
+    <p class="subtitle">風險分析 · 問題清單 · 明日談判地圖</p>
+    <button class="print-btn" onclick="window.print()">🖨️ 列印／存成 PDF</button>
+</header>
+
+<div class="quote">
+    核心問題：不是借不借錢，而是「娘家是否正在成為長期財務後盾？」
+</div>
+
+<div class="tabs">
+    <button class="active" data-tab="overview">🎯 會議重點</button>
+    <button data-tab="questions">📋 問題清單</button>
+    <button data-tab="deepdive">🔍 深入追問</button>
+    <button data-tab="scenarios">🔮 三種劇本</button>
+    <button data-tab="protect">🛡️ 防火牆與立場</button>
+</div>
+
+<p class="autosave-hint">✏️ 點方框可打勾、欄位可直接輸入記錄；內容自動儲存在本機（此裝置／此瀏覽器），重開不會消失。</p>
+
+<!-- ===== 分頁一：會議重點 ===== -->
+<section class="tab-panel active" id="overview">
+    <div class="note">
+        本次會議目的<strong>不是責備任何人</strong>，而是了解真實財務狀況，
+        避免問題持續擴大，並決定是否提供協助。建議全程保持冷靜、聚焦數字。
+    </div>
+
+    <div class="card">
+        <h2>明天會議最重要的三個問題</h2>
+        <ol>
+            <li>目前<strong>總負債</strong>多少？</li>
+            <li>眼鏡行<strong>實際淨利</strong>多少？</li>
+            <li>這次借錢後，<strong>6 個月後還會再缺錢嗎？</strong></li>
+        </ol>
+    </div>
+
+    <div class="card">
+        <h2>哥哥的真正任務</h2>
+        <p>不是阻止借錢，而是確認三件事：</p>
+        <ul class="checklist">
+            <li>妹妹是否知道真實財務狀況</li>
+            <li>男方是否願意承擔責任</li>
+            <li>這是短期現金流問題，還是長期依賴模式</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===== 分頁二：問題清單 ===== -->
+<section class="tab-panel" id="questions">
+    <div class="card">
+        <h2><span class="num">1</span>這次借錢的原因</h2>
+        <ul class="checklist">
+            <li>這次需要多少金額？</li>
+            <li>用途是什麼？</li>
+            <li>是房租、店租、貨款、貸款、小孩支出還是其他？</li>
+            <li>如果這筆錢拿不到，會發生什麼事情？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">2</span>家庭收入狀況</h2>
+        <ul class="checklist">
+            <li>先生目前收入多少？</li>
+            <li>妹妹目前收入多少？</li>
+            <li>店面每月營業額多少？</li>
+            <li>店面每月淨利多少？</li>
+            <li>是否有其他收入來源？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">3</span>家庭支出狀況</h2>
+        <ul class="checklist">
+            <li>房租或房貸多少？</li>
+            <li>店租多少？</li>
+            <li>小孩支出多少？</li>
+            <li>每月固定支出總額多少？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">4</span>負債狀況</h2>
+        <ul class="checklist">
+            <li>目前有多少貸款？</li>
+            <li>信用卡是否有分期或循環？</li>
+            <li>是否有用妹妹名義借款？</li>
+            <li>是否有向其他親友借款？</li>
+            <li>有沒有保證人？</li>
+            <li>總負債金額是多少？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">5</span>店面經營問題</h2>
+        <ul class="checklist">
+            <li>店面目前有獲利嗎？</li>
+            <li>店面營收、成本、淨利各是多少？</li>
+            <li>若虧損，原因是什麼？</li>
+            <li>有沒有改善計畫？</li>
+            <li>預計多久可以損益兩平？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">6</span>還款計畫</h2>
+        <ul class="checklist">
+            <li>這筆錢預計何時歸還？</li>
+            <li>每月可還多少？</li>
+            <li>若無法如期歸還怎麼處理？</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2><span class="num">7</span>未來規劃</h2>
+        <ul class="checklist">
+            <li>如何避免再次借錢？</li>
+            <li>是否考慮增加收入？</li>
+            <li>是否考慮調整店面經營模式？</li>
+            <li>是否有家庭財務預算表？</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">🚩 危險訊號（紅旗）</h2>
+    <div class="warning">
+        <ul class="checklist">
+            <li>講感情，不講數字。</li>
+            <li>無法清楚說明錢的用途，無法提供負債明細。</li>
+            <li>不願意公開收入與支出。</li>
+            <li>一直說「先借再說」，要求立刻借錢、不給思考時間。</li>
+            <li>以前借過很多次卻沒有還款紀錄。</li>
+            <li>把責任推給外部因素，沒有改善方案。</li>
+            <li>男方不願意承擔責任，讓妹妹出面借錢。</li>
+            <li>妹妹不知道家裡真實財務狀況。</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===== 分頁：深入追問（補漏） ===== -->
+<section class="tab-panel" id="deepdive">
+    <div class="note">
+        以下是一般清單最常<strong>漏掉</strong>、但真正決定後果的追問。重點不是帳面數字，
+        而是「真相、責任歸屬、與停損」。依嚴重度分為三級。
+    </div>
+
+    <h2 class="section-title" style="color:var(--bad);border-bottom-color:var(--bad);">🔴 最關鍵（決定要不要借）</h2>
+
+    <div class="card scenario bad">
+        <h2><span class="num">A</span>過去借款的總盤點</h2>
+        <ul class="checklist">
+            <li>過去總共跟娘家借了幾次？累計多少？還了多少？</li>
+            <li>金額是不是一次比一次大？（遞增＝惡化訊號）</li>
+            <li>還跟哪些親友、同事借過？各多少？</li>
+            <li>這次是第幾次？跟上次間隔多久？</li>
+        </ul>
+    </div>
+
+    <div class="card scenario bad">
+        <h2><span class="num">B</span>「妹妹名義」的法律風險</h2>
+        <p style="margin:0 0 8px;color:var(--muted);font-size:.9rem;">店登記在妹妹名下＝債務、稅、法律責任全是她的；獨資商號為<strong>無限責任</strong>，店倒會追到個人財產。</p>
+        <ul class="checklist">
+            <li>店的貸款、租約、信用卡、信貸是不是都掛妹妹名下？</li>
+            <li>有沒有用妹妹名義辦企業貸款、當保證人、簽本票？</li>
+            <li>妹妹有沒有在「不清楚內容」下簽過任何文件？</li>
+            <li>店的稅籍、發票、勞健保由誰處理？</li>
+            <li>萬一店收掉，剩餘債務誰扛？</li>
+        </ul>
+    </div>
+
+    <div class="card scenario bad">
+        <h2><span class="num">C</span>錢的真實流向 / 是否以債養債</h2>
+        <ul class="checklist">
+            <li>過去借的錢，有證據真的進了店／家用，還是去還別的債？</li>
+            <li>有沒有民間借貸、融資公司、地下錢莊？利率多少？</li>
+            <li>是不是「借新還舊」（以債養債）？</li>
+            <li>目前有沒有任何一筆債的利率高得異常？</li>
+        </ul>
+    </div>
+
+    <div class="card scenario bad">
+        <h2><span class="num">D</span>先生的背景查證</h2>
+        <p style="margin:0 0 8px;color:var(--muted);font-size:.9rem;">他年長許多、自己不出面，這些必須查。</p>
+        <ul class="checklist">
+            <li>先生婚前有沒有債務、不良信用紀錄？</li>
+            <li>先生有沒有前一段婚姻、前妻、其他子女、要付的扶養費？</li>
+            <li>先生名下有沒有資產？收入只靠這間店嗎？</li>
+            <li>為什麼是妹妹回娘家借，而不是先生想辦法？</li>
+            <li>先生自己的原生家庭／資源在哪？為何不向那邊求援？</li>
+            <li>先生有沒有賭博、投資、卡債等狀況？</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title" style="color:var(--normal);border-bottom-color:var(--normal);">🟠 重要但常被忽略</h2>
+
+    <div class="card scenario normal">
+        <h2><span class="num">E</span>婚姻與財產</h2>
+        <ul class="checklist">
+            <li>夫妻財產制是法定還是約定（分別財產制）？</li>
+            <li>房子、車子登記在誰名下？有沒有貸款？</li>
+            <li>婚前財產與婚後財產各有哪些？</li>
+            <li>萬一離婚，剩餘財產與債務怎麼分配？</li>
+        </ul>
+    </div>
+
+    <div class="card scenario normal">
+        <h2><span class="num">F</span>替代方案（借錢不是唯一解）</h2>
+        <ul class="checklist">
+            <li>銀行貸款、政府紓困申請過嗎？被拒的話為什麼？（被銀行拒＝信用已有問題）</li>
+            <li>店能不能收掉／頂讓止血，而不是繼續燒錢？</li>
+            <li>「繼續輸血」vs「結束營業」的成本算過嗎？</li>
+            <li>先生能不能去上班、增加固定收入？</li>
+            <li>需不需要走債務協商／更生（消債條例）？</li>
+        </ul>
+    </div>
+
+    <div class="card scenario normal">
+        <h2><span class="num">G</span>全家的停損與決策機制</h2>
+        <ul class="checklist">
+            <li>事先講好「這次最多借多少、借到第幾次就停」了嗎？</li>
+            <li>借出的金額在「全家承受得起的損失上限」內嗎？</li>
+            <li>統一窗口是誰？（避免被各個擊破、避免父母私下給）</li>
+            <li>全家是否已有共識？（避免日後手足互相埋怨）</li>
+            <li>借出去的錢有沒有借據／匯款憑證？（見另附借據）</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title" style="color:#b8860b;border-bottom-color:#b8860b;">🟡 易被情緒蓋過、但必須問</h2>
+
+    <div class="warning">
+        <h3>⚠️ H　妹妹本人的真實處境（不只是財務）</h3>
+        <ul class="checklist">
+            <li>妹妹自己清楚全部財務狀況嗎？還是只是被推出來借錢的人？</li>
+            <li>她有沒有獨立帳戶、收入能力、退路？勞健保／勞退有在繳嗎？</li>
+            <li>她的提款卡、印章、帳戶是誰在控制？</li>
+        </ul>
+        <p style="margin:12px 0 0;font-size:.92rem;">
+            <strong>嚴肅提醒：</strong>「年齡差距大＋經濟出狀況＋對方控制金錢＋對長輩態度強硬」，
+            是控制型關係／經濟暴力的典型組合。經濟控制在《家庭暴力防治法》屬家暴的一種。
+            不代表一定如此，但這個風險要放心上，必要時可撥 <strong>113 保護專線</strong>諮詢。
+        </p>
+    </div>
+
+    <div class="card scenario normal">
+        <h2><span class="num">I</span>小孩的保障</h2>
+        <ul class="checklist">
+            <li>小孩的扶養、教育、保險由誰負責？</li>
+            <li>有沒有動用到為小孩存的錢？</li>
+            <li>萬一家庭垮了，小孩怎麼安排？</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <h3>🛡️ J　父母養老金的防火牆</h3>
+        <ul class="checklist">
+            <li>這次的錢從哪裡出？是不是已經在掏父母的養老本？</li>
+            <li>父母有沒有瞞著其他子女私下給錢？</li>
+            <li>是否確認「不動到父母退休生活所需」這條紅線？</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===== 分頁三：三種劇本 ===== -->
+<section class="tab-panel" id="scenarios">
+    <div class="card scenario good">
+        <h3>最樂觀劇本 <span class="badge good">約 20%</span></h3>
+        <ul class="timeline">
+            <li>男方完整公開財務資料</li>
+            <li>發現只是現金流問題</li>
+            <li>店面經營改善</li>
+            <li>不再依賴娘家</li>
+            <li>3 年內恢復正常家庭財務</li>
+        </ul>
+        <p class="green">結果：家庭穩定、關係健康。</p>
+    </div>
+
+    <div class="card scenario normal">
+        <h3>普通劇本 <span class="badge normal">約 50%</span></h3>
+        <ul class="timeline">
+            <li>資料不完整但沒有惡意隱瞞</li>
+            <li>娘家借一部分資金</li>
+            <li>問題暫時解決</li>
+            <li>1~2 年後再次借錢</li>
+            <li>家族開始產生意見分裂</li>
+        </ul>
+        <p><strong>結果：長期依賴娘家輸血。</strong></p>
+    </div>
+
+    <div class="card scenario bad">
+        <h3>最悲觀劇本 <span class="badge bad">約 30%</span></h3>
+        <ul class="timeline">
+            <li>店面長期虧損但隱瞞</li>
+            <li>信用卡 → 信貸 → 民間借貸</li>
+            <li>妹妹成為借款人</li>
+            <li>負債快速擴張</li>
+            <li>催收、法院通知、婚姻危機</li>
+            <li>妹妹帶著小孩回娘家</li>
+        </ul>
+        <p class="red">結果：財務與家庭雙重危機。</p>
+    </div>
+</section>
+
+<!-- ===== 分頁四：防火牆與立場 ===== -->
+<section class="tab-panel" id="protect">
+    <div class="warning">
+        <h3>🛡️ 保護妹妹的防火牆</h3>
+        <ol>
+            <li>不要當保證人</li>
+            <li>不要簽本票</li>
+            <li>不要簽空白文件</li>
+            <li>確認自己知道所有負債</li>
+            <li>發現催收或法院文件立刻求助</li>
+        </ol>
+    </div>
+
+    <h2 class="section-title">家人可統一表達的立場</h2>
+    <div class="stance">
+        <p>
+            我們願意幫忙，但需要先了解完整狀況。
+            借錢不是問題，問題是必須知道這筆錢如何解決問題，
+            以及未來如何避免再次發生同樣情況。
+        </p>
+        <p>
+            今天不是在責怪任何人，而是在保護大家，
+            包括保護你們的小家庭以及父母的退休生活。
+        </p>
+    </div>
+</section>
+
+<footer>家庭財務會議作戰手冊 · 僅供內部討論使用</footer>
+
+<div class="toolbar">
+    <span class="prog" id="prog"></span>
+    <span class="saved-tag" id="savedTag">✓ 已儲存</span>
+    <button id="btnExport" class="primary">匯出筆記</button>
+    <button id="btnClear">清除</button>
+</div>
+
+<button class="toTop" id="toTop" title="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// 分頁切換
+document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+        document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active');});
+        document.querySelectorAll('.tab-panel').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        document.getElementById(b.dataset.tab).classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+    });
+});
+// 回到頂部
+var btn=document.getElementById('toTop');
+window.addEventListener('scroll',function(){
+    btn.style.display=window.scrollY>300?'block':'none';
+});
+
+// ===== 互動記錄：打勾 + 文字記錄 + 自動儲存 =====
+(function(){
+    var STORE='familyMeetingNotes_v1';
+    var data={};
+    try{ data=JSON.parse(localStorage.getItem(STORE)||'{}'); }catch(e){ data={}; }
+    var savedTag=document.getElementById('savedTag'), saveT;
+    function save(){
+        try{ localStorage.setItem(STORE,JSON.stringify(data)); }catch(e){}
+        if(savedTag){ savedTag.classList.add('show'); clearTimeout(saveT);
+            saveT=setTimeout(function(){ savedTag.classList.remove('show'); },1200); }
+        updateProg();
+    }
+    function autoresize(t){ t.style.height='auto'; t.style.height=(t.scrollHeight)+'px'; }
+
+    // 蒐集所有「問題項目」：checklist 與 各分頁的 ol（排除劇本時間軸）
+    var items=[];
+    document.querySelectorAll('ul.checklist > li').forEach(function(li){ items.push(li); });
+    document.querySelectorAll('.tab-panel ol > li').forEach(function(li){
+        if(li.closest('.timeline')) return;
+        li.classList.add('q-item'); items.push(li);
+    });
+
+    items.forEach(function(li,i){
+        var key='q'+i+'|'+li.textContent.trim().slice(0,40);
+        var rec=data[key]||{c:false,n:''};
+        var inner=li.innerHTML;
+        li.innerHTML='';
+        var cb=document.createElement('span'); cb.className='cb';
+        var q=document.createElement('span'); q.className='q'; q.innerHTML=inner;
+        var note=document.createElement('textarea'); note.className='qnote';
+        note.placeholder='＋ 記錄答案 / 數字 / 備註…'; note.value=rec.n||'';
+        if(rec.n) note.classList.add('filled');
+        if(rec.c) li.classList.add('checked');
+        li.appendChild(cb); li.appendChild(q); li.appendChild(note);
+
+        cb.addEventListener('click',function(){
+            li.classList.toggle('checked');
+            rec.c=li.classList.contains('checked'); data[key]=rec; save();
+        });
+        note.addEventListener('input',function(){
+            rec.n=note.value; data[key]=rec;
+            note.classList.toggle('filled',!!note.value.trim()); autoresize(note);
+        });
+        note.addEventListener('blur',save);
+        autoresize(note);
+    });
+
+    function updateProg(){
+        var done=0,withNote=0;
+        Object.keys(data).forEach(function(k){
+            if(data[k].c) done++;
+            if(data[k].n&&data[k].n.trim()) withNote++;
+        });
+        var p=document.getElementById('prog');
+        if(p) p.innerHTML='已勾 <b>'+done+'</b>　已記 <b>'+withNote+'</b> / 共 '+items.length+' 題';
+    }
+    updateProg();
+
+    // 切換分頁時重算隱藏分頁中文字框的高度
+    document.querySelectorAll('.tabs button').forEach(function(b){
+        b.addEventListener('click',function(){
+            setTimeout(function(){
+                document.querySelectorAll('.tab-panel.active .qnote').forEach(autoresize);
+            },30);
+        });
+    });
+
+    // 匯出筆記為文字檔
+    document.getElementById('btnExport').addEventListener('click',function(){
+        var lines=['家庭財務會議 — 記錄','日期：________　與會：________',''];
+        var curHead='';
+        items.forEach(function(li){
+            var card=li.closest('.card,.warning,.stance');
+            var h=card&&card.querySelector('h2,h3')?card.querySelector('h2,h3').textContent.trim():'';
+            if(h&&h!==curHead){ curHead=h; lines.push('','【'+h+'】'); }
+            var q=li.querySelector('.q'), note=li.querySelector('.qnote');
+            lines.push((li.classList.contains('checked')?'[v] ':'[ ] ')+(q?q.textContent.trim():''));
+            if(note&&note.value.trim()) lines.push('      → '+note.value.trim().replace(/\n/g,'\n        '));
+        });
+        var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+        var a=document.createElement('a');
+        a.href=URL.createObjectURL(blob); a.download='家庭財務會議記錄.txt';
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); document.body.removeChild(a); },100);
+    });
+
+    // 清除全部
+    document.getElementById('btnClear').addEventListener('click',function(){
+        if(!confirm('確定清除所有已勾選與記錄嗎？此動作無法復原。')) return;
+        data={}; try{ localStorage.removeItem(STORE); }catch(e){}
+        items.forEach(function(li){
+            li.classList.remove('checked');
+            var n=li.querySelector('.qnote');
+            if(n){ n.value=''; n.classList.remove('filled'); autoresize(n); }
+        });
+        updateProg();
+    });
+})();
+</script>
+
+</body>
+</html>
